@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Alice-anjali/github-integration/issues"
   },
-  "homepage": "https://github.com/Alice-anjali/github-integration#readme"
+  "homepage": "https://github.com/Alice-anjali/github-integration#readme",
+  "dependencies": {
+    "github-api": "^3.0.0"
+  }
 }
