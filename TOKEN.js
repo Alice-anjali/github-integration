@@ -1,4 +1,4 @@
 // Enter your token here
-var token = "879";
+var token = "";
 
 module.exports = token;
