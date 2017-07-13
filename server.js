@@ -1,4 +1,9 @@
-const secret = process.env.WEBHOOK_SECRET
+var dotenv = require('dotenv');
+
+dotenv.load();
+
+
+const secret = process.env.WEBHOOK_SECRET;
 
 const http = require('http')
 const webHookHandler = require('github-webhook-handler')({
