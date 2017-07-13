@@ -22,7 +22,7 @@ webHookHandler.on('pull_request', (event) => {
 function handleRequest (request, response) {
   // ignore all requests that aren’t POST requests
   if (request.method !== 'POST') return response.end('ok')
-
+  console.log("Request Received");
   // here we pass the current request & response to the webHookHandler we created
   // on top. If the request is valid, then the "issue" above handler is called
   webHookHandler(request, response, () => response.end('ok'))
