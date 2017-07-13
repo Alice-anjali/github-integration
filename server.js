@@ -10,7 +10,7 @@ const webHookHandler = require('github-webhook-handler')({
   path: '/',
   secret: secret
 })
-http.createServer(handleRequest).listen(3000)
+http.createServer(handleRequest).listen(8080)
 console.log('server started')
 
 webHookHandler.on('pull_request', (event) => {
