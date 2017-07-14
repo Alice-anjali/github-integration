@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/Alice-anjali/github-integration#readme",
   "dependencies": {
-    "github-api": "^3.0.0"
+    "dotenv": "^4.0.0",
+    "github-api": "^3.0.0",
+    "request": "^2.81.0"
   }
 }

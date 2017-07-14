@@ -1,19 +1,50 @@
+var dotenv = require('dotenv');
+
+dotenv.load();
 var GitHub = require('github-api');
 var get_token = require('./TOKEN');
+var request = require('request');
 
-// basic auth
 var gh = new GitHub({
       token : get_token
 });
 
-// var me = gh.getUser();
-// me.listNotifications(function(err, notifications) {
-   // do some stuff
-  //  console.log("get notifications = "+me.name);
-// });
+const secret = process.env.WEBHOOK_SECRET;
 
-var clayreimann = gh.getUser('clayreimann');
-  clayreimann.listRepos(function(err, repos) {
-     // look at all the starred repos!
-     console.log("get data = "+repos);
-});
+const http = require('http')
+const webHookHandler = require('github-webhook-handler')({
+  path: '/',
+  secret: secret
+})
+http.createServer(handleRequest).listen(8080)
+console.log('server started')
+
+webHookHandler.on('pull_request', (event) => {
+  console.log(`Received PR "${event.payload.pull_request.number}"`);
+  console.log(`Commits URL "${event.payload.pull_request.commits_url}"`);
+
+  request({
+    url : event.payload.pull_request.commits_url,
+    headers : {
+      'User-Agent': 'Hoodie Bot'
+    }
+  }, (error, response,body) => {
+    var commits = JSON.parse(body);
+    var commitMessages = [];
+    for(var i = 0; i < commits.length; i++) {
+      commitMessages.push(commits[i].commit.message);
+    }
+    console.log(commitMessages);
+  });
+})
+
+function handleRequest (request, response) {
+  // ignore all requests that aren’t POST requests
+  if (request.method !== 'POST') {
+    console.log("Get Request Received");
+    return response.end('ok');
+  }
+  // here we pass the current request & response to the webHookHandler we created
+  // on top. If the request is valid, then the "issue" above handler is called
+  webHookHandler(request, response, () => response.end('ok'))
+}
