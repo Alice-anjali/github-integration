@@ -1,7 +1,13 @@
 var dotenv = require('dotenv');
 
 dotenv.load();
+var GitHub = require('github-api');
+var get_token = require('./TOKEN');
+var request = require('request');
 
+var gh = new GitHub({
+      token : get_token
+});
 
 const secret = process.env.WEBHOOK_SECRET;
 
@@ -14,9 +20,13 @@ http.createServer(handleRequest).listen(8080)
 console.log('server started')
 
 webHookHandler.on('pull_request', (event) => {
-  console.log(`Received PR "${event.payload.pull_request.number}"`)
-  console.log(`Commits URL "${event.payload.pull_request.commits_url}"`)
-
+  console.log(`Received PR "${event.payload.pull_request.number}"`);
+  console.log(`Commits URL "${event.payload.pull_request.commits_url}"`);
+  request(event.payload.pull_request.commits_url, (error, response,body) => {
+    console.log(error);
+    console.log(response);
+    console.log(body);
+  })
 })
 
 function handleRequest (request, response) {
@@ -29,26 +39,3 @@ function handleRequest (request, response) {
   // on top. If the request is valid, then the "issue" above handler is called
   webHookHandler(request, response, () => response.end('ok'))
 }
-
-
-
-
-//
-// var GitHub = require('github-api');
-// var get_token = require('./TOKEN');
-
-// basic auth
-// var gh = new GitHub({
-//       token : get_token
-// });
-//
-// var me = gh.getUser();
-// me.listRepos(function(err, repos) {
-//    console.log("get repos = "+repos[0].name);
-// });
-
-// var clayreimann = gh.getUser('Alice-anjal');
-// clayreimann.listRepos(function(err, repos) {
-   // look at all the starred repos!
-//    console.log("get data = "+repos[29].name);
-// });
