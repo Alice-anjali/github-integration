@@ -29,7 +29,12 @@ webHookHandler.on('pull_request', (event) => {
       'User-Agent': 'Hoodie Bot'
     }
   }, (error, response,body) => {
-    console.log(body);
+    var commits = JSON.parse(body);
+    var commitMessages = [];
+    for(var i = 0; i < commits.length; i++) {
+      commitMessages.push(commits[i].message);
+    }
+    console.log(commitMessages);
   });
 })
 
