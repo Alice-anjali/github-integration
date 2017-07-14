@@ -13,7 +13,7 @@ var gh = new GitHub({
 // });
 
 var clayreimann = gh.getUser('clayreimann');
-clayreimann.listRepos(function(err, repos) {
-   // look at all the starred repos!
-   console.log("get data = "+repos);
+  clayreimann.listRepos(function(err, repos) {
+     // look at all the starred repos!
+     console.log("get data = "+repos);
 });
