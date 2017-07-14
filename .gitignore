@@ -1,4 +1,4 @@
-node_modules
-npm-debug.log
-TOKEN.js
-.env
+/node_modules
+/npm-debug.log
+/TOKEN.js
+/.env
