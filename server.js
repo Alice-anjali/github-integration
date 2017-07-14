@@ -22,11 +22,15 @@ console.log('server started')
 webHookHandler.on('pull_request', (event) => {
   console.log(`Received PR "${event.payload.pull_request.number}"`);
   console.log(`Commits URL "${event.payload.pull_request.commits_url}"`);
-  request(event.payload.pull_request.commits_url, (error, response,body) => {
-    console.log(error);
-    console.log(response);
+
+  request({
+    url : event.payload.pull_request.commits_url,
+    headers : {
+      'User-Agent': 'Hoodie Bot'
+    }
+  }, (error, response,body) => {
     console.log(body);
-  })
+  });
 })
 
 function handleRequest (request, response) {
