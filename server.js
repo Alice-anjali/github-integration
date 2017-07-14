@@ -32,7 +32,7 @@ webHookHandler.on('pull_request', (event) => {
     var commits = JSON.parse(body);
     var commitMessages = [];
     for(var i = 0; i < commits.length; i++) {
-      commitMessages.push(commits[i].message);
+      commitMessages.push(commits[i].commit.message);
     }
     console.log(commitMessages);
   });
