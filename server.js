@@ -35,9 +35,13 @@ webHookHandler.on('pull_request', (event) => {
     for(var i = 0; i < commits.length; i++) {
       commitMessages.push(commits[i].commit.message);
     }
-    console.log(commitMessages);
-    var valid = validateMessage('chore(index): an example commit message');
-    console.log(valid);
+    // console.log(commitMessages);
+    // var valid = validateMessage('chore(index): an example commit message');
+    for(var i = 0; i < commitMessages.length; i++) {
+      console.log(commitMessages[i]);
+      var valid = validateMessage('chore(index): an example commit message');
+      console.log(valid);
+    }
   });
 })
 
