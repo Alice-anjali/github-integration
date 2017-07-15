@@ -21,5 +21,8 @@
     "dotenv": "^4.0.0",
     "github-api": "^3.0.0",
     "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "validate-commit-msg": "^2.12.2"
   }
 }

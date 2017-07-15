@@ -4,6 +4,7 @@ dotenv.load();
 var GitHub = require('github-api');
 var get_token = require('./TOKEN');
 var request = require('request');
+var validateMessage = require('validate-commit-msg');
 
 var gh = new GitHub({
       token : get_token
@@ -35,6 +36,8 @@ webHookHandler.on('pull_request', (event) => {
       commitMessages.push(commits[i].commit.message);
     }
     console.log(commitMessages);
+    var valid = validateMessage('chore(index): an example commit message');
+    console.log(valid);
   });
 })
 
