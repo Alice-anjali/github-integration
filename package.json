@@ -19,9 +19,7 @@
   "homepage": "https://github.com/Alice-anjali/github-integration#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "github-api": "^3.0.0",
-    "probot": "^0.7.5",
-    "request": "^2.81.0"
+    "probot": "^0.7.5"
   },
   "devDependencies": {
     "validate-commit-msg": "^2.12.2"
